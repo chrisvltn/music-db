@@ -157,3 +157,26 @@ type TracksRequest = {
 		strLocked: string
 	}[]
 }
+
+type TrendingRequest = {
+	trending: {
+		idTrend: string
+		intChartPlace: string
+		idArtist: string
+		idAlbum: string
+		idTrack: string
+		strArtistMBID: string
+		strAlbumMBID: string
+		strTrackMBID: string
+		strArtist: string
+		strAlbum: string
+		strTrack: string
+		strArtistThumb: string
+		strAlbumThumb: string
+		strTrackThumb: string
+		strCountry: string
+		strType: string
+		intWeek: string
+		dateAdded: string
+	}[]
+}
