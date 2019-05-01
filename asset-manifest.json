@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/music-db/static/css/main.c1338f3b.chunk.css",
+    "main.js": "/music-db/static/js/main.7b53b52b.chunk.js",
+    "main.js.map": "/music-db/static/js/main.7b53b52b.chunk.js.map",
+    "runtime~main.js": "/music-db/static/js/runtime~main.5e07afb3.js",
+    "runtime~main.js.map": "/music-db/static/js/runtime~main.5e07afb3.js.map",
+    "static/js/2.bc098a12.chunk.js": "/music-db/static/js/2.bc098a12.chunk.js",
+    "static/js/2.bc098a12.chunk.js.map": "/music-db/static/js/2.bc098a12.chunk.js.map",
+    "index.html": "/music-db/index.html",
+    "precache-manifest.c1c8ba7dd763b8d0c39838eb3fa33d07.js": "/music-db/precache-manifest.c1c8ba7dd763b8d0c39838eb3fa33d07.js",
+    "service-worker.js": "/music-db/service-worker.js",
+    "static/css/main.c1338f3b.chunk.css.map": "/music-db/static/css/main.c1338f3b.chunk.css.map",
+    "static/media/404-background.jpg": "/music-db/static/media/404-background.45ad0cac.jpg",
+    "static/media/logo.png": "/music-db/static/media/logo.9343fe58.png",
+    "static/media/thumb-placeholder.png": "/music-db/static/media/thumb-placeholder.57cd97e6.png"
+  }
+}
