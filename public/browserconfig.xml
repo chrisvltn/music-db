@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square150x150logo src="https://github.com/chrisvltn/music-db/static/icons/mstile-150x150.png"/>
+            <TileColor>#ff3a63</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>
