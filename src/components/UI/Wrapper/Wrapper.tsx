@@ -1,7 +1,7 @@
-import styled from 'styled-jss'
 import { HTMLProps } from 'react';
+import styled from 'styled-jss'
 
-const Container: React.ComponentType<Props> = styled('div')({
+const Wrapper: React.ComponentType<Props> = styled('div')({
 	position: 'relative',
 	display: 'block',
 	padding: [0, 10],
@@ -35,4 +35,4 @@ type Props = HTMLProps<HTMLDivElement> & {
 	backgroundImage?: string
 }
 
-export default Container
+export default Wrapper

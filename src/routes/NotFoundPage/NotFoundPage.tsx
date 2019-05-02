@@ -6,19 +6,20 @@ import { Link } from 'react-router-dom';
 import jss from '../../lib/jss';
 
 /* Custom components */
-import Container from '../../components/UI/Container/Container';
+import Wrapper from '../../components/UI/Wrapper/Wrapper';
 import withRandomArtistThumbnail, { WithRandomArtistThumbnail } from '../../hoc/withRandomArtistThumbnail/withRandomArtistThumbnail';
+import Container from '../../components/UI/Container/Container';
 
 const NotFoundPage: React.FC<WithRandomArtistThumbnail> = ({
 	thumb: background,
 }) =>
-	<Container backgroundImage={background}>
-		<div className={classes.wrapper}>
+	<Wrapper backgroundImage={background}>
+		<Container className={classes.wrapper}>
 			<h2 className={classes.title}>Oops!</h2>
 			<h3 className={classes.details}>We couldn't find what you are looking for :(</h3>
 			<Link to="/" className={classes.link}>Go back home</Link>
-		</div>
-	</Container>
+		</Container>
+	</Wrapper>
 
 const { classes } = jss.createStyleSheet({
 	wrapper: {

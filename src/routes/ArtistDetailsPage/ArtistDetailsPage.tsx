@@ -9,6 +9,7 @@ import axios from '../../lib/axios';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SectionTitle from '../../components/UI/SectionTitle/SectionTitle';
+import Wrapper from '../../components/UI/Wrapper/Wrapper';
 import Container from '../../components/UI/Container/Container';
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
 import ArtistBigPicture from '../../components/ArtistBigPicture/ArtistBigPicture';
@@ -187,6 +188,7 @@ class ArtistDetailsPage extends Component<Props, State> {
 					style={artist.style}
 				/>
 
+				<Wrapper>
 				<Container>
 					<SectionTitle>
 						Top tracks
@@ -215,6 +217,7 @@ class ArtistDetailsPage extends Component<Props, State> {
 						There is no album available
 					</ErrorMessage>
 				</Container>
+				</Wrapper>
 			</>
 		)
 	}

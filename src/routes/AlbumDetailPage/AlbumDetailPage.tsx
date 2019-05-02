@@ -6,6 +6,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 import axios from '../../lib/axios';
 
 /* Custom components */
+import Wrapper from '../../components/UI/Wrapper/Wrapper';
 import Container from '../../components/UI/Container/Container';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
@@ -179,13 +180,15 @@ class AlbumDetailPage extends Component<Props, State> {
 					artistName={album.artist.name}
 				/>
 
-				<Container>
-					<TrackList tracks={tracks.list} />
-					<Spinner show={tracks.isLoading} />
-					<ErrorMessage show={tracks.list.length === 0 && !tracks.isLoading}>
-						There is no track available
-					</ErrorMessage>
-				</Container>
+				<Wrapper>
+					<Container>
+						<TrackList tracks={tracks.list} />
+						<Spinner show={tracks.isLoading} />
+						<ErrorMessage show={tracks.list.length === 0 && !tracks.isLoading}>
+							There is no track available
+						</ErrorMessage>
+					</Container>
+				</Wrapper>
 			</>
 		)
 	}

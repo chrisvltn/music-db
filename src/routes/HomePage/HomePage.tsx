@@ -11,12 +11,13 @@ import recentlyViewed, { RecentlyViewed } from '../../providers/recentlyViewed';
 
 /* Custom components */
 import SectionTitle from '../../components/UI/SectionTitle/SectionTitle';
-import Container from '../../components/UI/Container/Container';
+import Wrapper from '../../components/UI/Wrapper/Wrapper';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import HorizontalScroll from '../../components/UI/HorizontalScroll/HorizontalScroll';
+import Container from '../../components/UI/Container/Container';
 import AlbumList from '../../components/Album/AlbumList/AlbumList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ThumbItem from '../../components/ThumbItem/ThumbItem';
-import HorizontalScroll from '../../components/UI/HorizontalScroll/HorizontalScroll';
 
 class HomePage extends Component<Props, State> {
 	state: State = {
@@ -136,8 +137,8 @@ class HomePage extends Component<Props, State> {
 		const singles = this.state.trendingSingles
 
 		return (
-			<Container>
-				<div className={classes.home}>
+			<Wrapper>
+				<Container className={classes.home}>
 					<SearchBar onSubmit={query => this.props.history.push(`/artist/${query}`)} />
 
 					{recentlyViewed.list.length ?
@@ -173,8 +174,8 @@ class HomePage extends Component<Props, State> {
 					</SectionTitle>
 					<Spinner show={singles.isLoading} />
 					<AlbumList horizontal list={singles.list} />
-				</div>
-			</Container>
+				</Container>
+			</Wrapper>
 		)
 	}
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import jss from '../../lib/jss';
 
 import ColoredBackground from '../UI/ColoredBackground/ColoredBackground';
+import Container from '../UI/Container/Container';
 
 const ArtistBigPicture: React.FC<Props> = ({
 	name,
@@ -16,9 +17,11 @@ const ArtistBigPicture: React.FC<Props> = ({
 		<ColoredBackground color="rgba(0, 0, 0, 0)" image={imageThumb} />
 
 		<div className={classes.overlay}>
+			<Container>
 			<h3 className={classes.name}>{name}</h3>
 			<p className={classes.detail}>{year}</p>
 			<p className={classes.detail}>{style}</p>
+			</Container>
 		</div>
 	</div>
 

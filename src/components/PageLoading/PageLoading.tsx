@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import jss from '../../lib/jss';
 
 /* Custom components */
+import Wrapper from '../UI/Wrapper/Wrapper';
 import Container from '../UI/Container/Container';
 import Spinner from '../UI/Spinner/Spinner';
 import withRandomArtistThumbnail, { WithRandomArtistThumbnail } from '../../hoc/withRandomArtistThumbnail/withRandomArtistThumbnail';
@@ -29,11 +30,11 @@ const PageLoading: React.FC<Props> = ({
 			: null
 
 	return (
-		<Container backgroundImage={thumb}>
-			<div className={classes.wrapper}>
+		<Wrapper backgroundImage={thumb}>
+			<Container className={classes.wrapper}>
 				{element}
-			</div>
-		</Container>
+			</Container>
+		</Wrapper>
 	)
 }
 
