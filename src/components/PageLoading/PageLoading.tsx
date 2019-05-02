@@ -6,14 +6,16 @@ import { Link } from 'react-router-dom';
 /* Libs */
 import jss from '../../lib/jss';
 
-/* Assets */
-import background from '../../assets/images/404-background.jpg'
-
 /* Custom components */
 import Container from '../UI/Container/Container';
 import Spinner from '../UI/Spinner/Spinner';
+import withRandomArtistThumbnail, { WithRandomArtistThumbnail } from '../../hoc/withRandomArtistThumbnail/withRandomArtistThumbnail';
 
-const PageLoading: React.FC<Props> = ({ isLoading, error }) => {
+const PageLoading: React.FC<Props> = ({
+	thumb,
+	isLoading,
+	error,
+}) => {
 	const element = isLoading ?
 		<div className={classes.spinner}>
 			<Spinner />
@@ -27,7 +29,7 @@ const PageLoading: React.FC<Props> = ({ isLoading, error }) => {
 			: null
 
 	return (
-		<Container backgroundImage={background}>
+		<Container backgroundImage={thumb}>
 			<div className={classes.wrapper}>
 				{element}
 			</div>
@@ -64,6 +66,6 @@ const { classes } = jss.createStyleSheet({
 	}
 }).attach()
 
-type Props = LoadingComponentProps
+type Props = LoadingComponentProps & WithRandomArtistThumbnail
 
-export default PageLoading
+export default withRandomArtistThumbnail(PageLoading)

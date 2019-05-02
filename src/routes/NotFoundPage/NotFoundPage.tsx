@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 /* Libs */
 import jss from '../../lib/jss';
 
-/* Assets */
-import background from '../../assets/images/404-background.jpg'
-
 /* Custom components */
 import Container from '../../components/UI/Container/Container';
+import withRandomArtistThumbnail, { WithRandomArtistThumbnail } from '../../hoc/withRandomArtistThumbnail/withRandomArtistThumbnail';
 
-const NotFoundPage = () =>
+const NotFoundPage: React.FC<WithRandomArtistThumbnail> = ({
+	thumb: background,
+}) =>
 	<Container backgroundImage={background}>
 		<div className={classes.wrapper}>
 			<h2 className={classes.title}>404</h2>
@@ -46,4 +46,4 @@ const { classes } = jss.createStyleSheet({
 	},
 }).attach()
 
-export default NotFoundPage
+export default withRandomArtistThumbnail(NotFoundPage)
