@@ -6,16 +6,24 @@ import { withRouter, RouteComponentProps } from 'react-router';
 import jss from '../../lib/jss';
 import axios from '../../lib/axios';
 
+/* Providers */
+import recentlyViewed, { RecentlyViewed } from '../../providers/recentlyViewed';
+
 /* Custom components */
 import SectionTitle from '../../components/UI/SectionTitle/SectionTitle';
 import Container from '../../components/UI/Container/Container';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import AlbumList from '../../components/Album/AlbumList/AlbumList';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import ThumbItem from '../../components/ThumbItem/ThumbItem';
+import HorizontalScroll from '../../components/UI/HorizontalScroll/HorizontalScroll';
 
 class HomePage extends Component<Props, State> {
 	state: State = {
-		recentlyViewedArtistsList: [],
+		recentlyViewed: {
+			list: [],
+			isLoading: true,
+		},
 		trendingAlbums: {
 			list: [],
 			isLoading: true,
@@ -29,6 +37,7 @@ class HomePage extends Component<Props, State> {
 	componentDidMount() {
 		this.getTrendingAlbums()
 		this.getTrendingSingles()
+		this.getRecentlyViewed()
 	}
 
 	async getTrendingAlbums() {
@@ -103,7 +112,26 @@ class HomePage extends Component<Props, State> {
 		})
 	}
 
+	async getRecentlyViewed() {
+		this.setState({
+			recentlyViewed: {
+				list: [],
+				isLoading: true,
+			}
+		})
+
+		const list = await recentlyViewed.list()
+
+		this.setState({
+			recentlyViewed: {
+				list,
+				isLoading: false,
+			}
+		})
+	}
+
 	render() {
+		const { recentlyViewed } = this.state
 		const albums = this.state.trendingAlbums
 		const singles = this.state.trendingSingles
 
@@ -111,6 +139,28 @@ class HomePage extends Component<Props, State> {
 			<Container>
 				<div className={classes.home}>
 					<SearchBar onSubmit={query => this.props.history.push(`/artist/${query}`)} />
+
+					{recentlyViewed.list.length ?
+						<>
+							<SectionTitle>
+								Recently Viewed
+							</SectionTitle>
+
+							<HorizontalScroll>
+								{
+									recentlyViewed.list.map(item =>
+										<ThumbItem
+											key={item.data.id}
+											link={item.type === 'album' ? `/artist/${item.data.artist.name}/album/${item.data.title}` : `/artist/${item.data.name}`}
+											title={item.type === 'album' ? item.data.title : item.data.name}
+											image={item.data.images.thumb}
+										/>
+									)
+								}
+							</HorizontalScroll>
+						</>
+						: null
+					}
 
 					<SectionTitle>
 						Trending albums
@@ -138,7 +188,10 @@ const { classes } = jss.createStyleSheet({
 type Props = RouteComponentProps
 
 type State = {
-	recentlyViewedArtistsList: Artist[]
+	recentlyViewed: {
+		list: RecentlyViewed
+		isLoading: boolean
+	}
 	trendingAlbums: {
 		list: Album[]
 		isLoading: boolean

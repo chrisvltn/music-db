@@ -11,6 +11,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
 import TrackList from '../../components/Tracks/TrackList/TrackList';
 import AlbumBigPicture from '../../components/Album/AlbumBigPicure/AlbumBigPicure';
+import recentlyViewed from '../../providers/recentlyViewed';
 
 class AlbumDetailPage extends Component<Props, State> {
 	state: State = {
@@ -71,30 +72,34 @@ class AlbumDetailPage extends Component<Props, State> {
 		if (!data.album)
 			return this.props.history.push('/404')
 
-		const album = data.album[0]
+		const album: Album = {
+			id: data.album[0].idAlbum,
+			title: data.album[0].strAlbum,
+			year: data.album[0].intYearReleased,
+			images: {
+				thumb: data.album[0].strAlbumThumb,
+				cover: {
+					front: data.album[0].strAlbumThumbHQ || data.album[0].strAlbumThumb,
+					back: data.album[0].strAlbumThumbBack,
+					spine: data.album[0].strAlbumSpine,
+				},
+			},
+			artist: {
+				...this.state.album.artist,
+				id: data.album[0].idArtist,
+				name: data.album[0].strArtist,
+				style: data.album[0].strStyle,
+			},
+		}
 
-		this.getTrackList(album.idAlbum)
+		this.getTrackList(album.id)
+		this.saveRecentlyViewed(album)
 
 		this.setState({
 			album: {
+				...this.state.album,
+				...album,
 				isLoading: false,
-				id: album.idAlbum,
-				title: album.strAlbum,
-				year: album.intYearReleased,
-				images: {
-					thumb: album.strAlbumThumb,
-					cover: {
-						front: album.strAlbumThumbHQ || album.strAlbumThumb,
-						back: album.strAlbumThumbBack,
-						spine: album.strAlbumSpine,
-					},
-				},
-				artist: {
-					...this.state.album.artist,
-					id: album.idArtist,
-					name: album.strArtist,
-					style: album.strStyle,
-				},
 			},
 		})
 	}
@@ -146,6 +151,10 @@ class AlbumDetailPage extends Component<Props, State> {
 				list: tracks,
 			}
 		})
+	}
+
+	async saveRecentlyViewed(album: Album) {
+		recentlyViewed.add(album, 'album')
 	}
 
 	render() {

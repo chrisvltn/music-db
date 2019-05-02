@@ -14,6 +14,7 @@ import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
 import ArtistBigPicture from '../../components/ArtistBigPicture/ArtistBigPicture';
 import TrackList from '../../components/Tracks/TrackList/TrackList';
 import AlbumList from '../../components/Album/AlbumList/AlbumList';
+import recentlyViewed from '../../providers/recentlyViewed';
 
 class ArtistDetailsPage extends Component<Props, State> {
 	state: State = {
@@ -52,20 +53,24 @@ class ArtistDetailsPage extends Component<Props, State> {
 		if (!data.artists)
 			return this.props.history.push('/404')
 
-		const artist = data.artists[0]
+		const artist = {
+			name: data.artists[0].strArtist,
+			id: data.artists[0].idArtist,
+			formedYear: data.artists[0].intFormedYear || data.artists[0].intBornYear,
+			style: data.artists[0].strStyle || data.artists[0].strGenre,
+			images: {
+				thumb: data.artists[0].strArtistThumb,
+				wide: data.artists[0].strArtistWideThumb || data.artists[0].strArtistBanner || data.artists[0].strArtistClearart || data.artists[0].strArtistFanart || data.artists[0].strArtistFanart2 || data.artists[0].strArtistFanart3,
+			},
+		}
+
+		this.saveRecentlyViewed(artist)
 
 		this.setState({
 			artist: {
 				...this.state.artist,
+				...artist,
 				isLoading: false,
-				name: artist.strArtist,
-				id: artist.idArtist,
-				formedYear: artist.intFormedYear || artist.intBornYear,
-				style: artist.strStyle || artist.strGenre,
-				images: {
-					thumb: artist.strArtistThumb,
-					wide: artist.strArtistWideThumb || artist.strArtistBanner || artist.strArtistClearart || artist.strArtistFanart || artist.strArtistFanart2 || artist.strArtistFanart3,
-				},
 			}
 		})
 	}
@@ -150,6 +155,10 @@ class ArtistDetailsPage extends Component<Props, State> {
 				list: tracks,
 			}
 		})
+	}
+
+	async saveRecentlyViewed(artist: Artist) {
+		recentlyViewed.add(artist, 'artist')
 	}
 
 	showMoreTracks() {
