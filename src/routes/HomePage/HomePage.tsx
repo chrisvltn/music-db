@@ -13,7 +13,7 @@ import recentlyViewed, { RecentlyViewed } from '../../providers/recentlyViewed';
 import SectionTitle from '../../components/UI/SectionTitle/SectionTitle';
 import Wrapper from '../../components/UI/Wrapper/Wrapper';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import HorizontalScroll from '../../components/UI/HorizontalScroll/HorizontalScroll';
+import MobileHorizontalScroll from '../../components/UI/MobileHorizontalScroll/MobileHorizontalScroll';
 import Container from '../../components/UI/Container/Container';
 import AlbumList from '../../components/Album/AlbumList/AlbumList';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -147,7 +147,7 @@ class HomePage extends Component<Props, State> {
 								Recently Viewed
 							</SectionTitle>
 
-							<HorizontalScroll>
+							<MobileHorizontalScroll>
 								{
 									recentlyViewed.list.map(item =>
 										<ThumbItem
@@ -158,7 +158,7 @@ class HomePage extends Component<Props, State> {
 										/>
 									)
 								}
-							</HorizontalScroll>
+							</MobileHorizontalScroll>
 						</>
 						: null
 					}

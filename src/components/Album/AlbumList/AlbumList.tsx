@@ -1,7 +1,7 @@
 import React from 'react'
 import jss from '../../../lib/jss';
 
-import HorizontalScroll from '../../UI/HorizontalScroll/HorizontalScroll';
+import MobileHorizontalScroll from '../../UI/MobileHorizontalScroll/MobileHorizontalScroll';
 import ThumbItem from '../../ThumbItem/ThumbItem';
 
 const AlbumList: React.FC<Props> = ({
@@ -18,9 +18,9 @@ const AlbumList: React.FC<Props> = ({
 	)
 
 	return horizontal ?
-		<HorizontalScroll>
+		<MobileHorizontalScroll>
 			{elements}
-		</HorizontalScroll> :
+		</MobileHorizontalScroll> :
 		<div className={classes.wrapper}>
 			{elements}
 		</div>
