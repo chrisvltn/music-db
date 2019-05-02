@@ -7,9 +7,13 @@ const TrackItem: React.FC<Props> = ({
 	duration,
 }) => {
 	// Calculates time string in mm:ss format
-	const minutes = Math.floor(duration / (1000 * 60))
-	const seconds = Math.round((duration / 1000) - (minutes * 60))
-	const time = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0')
+	let time = '--:--'
+
+	if (duration) {
+		const minutes = Math.floor(duration / (1000 * 60))
+		const seconds = Math.round((duration / 1000) - (minutes * 60))
+		time = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0')
+	}
 
 	return (
 		<div className={classes.item}>
