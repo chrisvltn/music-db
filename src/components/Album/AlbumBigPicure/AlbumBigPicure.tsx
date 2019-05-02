@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import jss from '../../lib/jss';
+import jss from '../../../lib/jss';
 
-import Cover3D from '../Cover3D/Cover3D';
-import ColoredBackground from '../UI/ColoredBackground/ColoredBackground';
+import Cover3D from '../../Cover3D/Cover3D';
+import ColoredBackground from '../../UI/ColoredBackground/ColoredBackground';
 
 const AlbumBigPicture: React.FC<Props> = ({
 	title,

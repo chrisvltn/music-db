@@ -1,15 +1,15 @@
 import React from 'react'
 import jss from '../../../lib/jss';
 
-import AlbumItem from '../AlbumItem/AlbumItem';
 import HorizontalScroll from '../../UI/HorizontalScroll/HorizontalScroll';
+import ThumbItem from '../../ThumbItem/ThumbItem';
 
 const AlbumList: React.FC<Props> = ({
 	list,
 	horizontal,
 }) => {
 	const elements = list.map(album =>
-		<AlbumItem
+		<ThumbItem
 			key={album.id}
 			link={`/artist/${album.artist.name}/album/${album.title}`}
 			title={album.title}

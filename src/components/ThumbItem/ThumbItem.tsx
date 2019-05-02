@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import jss from '../../../lib/jss';
+import jss from '../../lib/jss';
 
-import placeholder from '../../../assets/images/thumb-placeholder.png'
+import placeholder from '../../assets/images/thumb-placeholder.png'
 
-const AlbumItem: React.FC<Props> = ({
+const ThumbItem: React.FC<Props> = ({
 	title,
 	image,
 	link,
@@ -26,6 +26,7 @@ const { classes } = jss.createStyleSheet({
 		minWidth: 150,
 		width: 150,
 		verticalAlign: 'top',
+		cursor: 'pointer',
 	},
 	image: {
 		display: 'block',
@@ -50,4 +51,4 @@ type Props = {
 	link: string
 }
 
-export default AlbumItem
+export default ThumbItem

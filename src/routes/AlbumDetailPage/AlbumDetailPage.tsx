@@ -10,7 +10,7 @@ import Container from '../../components/UI/Container/Container';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
 import TrackList from '../../components/Tracks/TrackList/TrackList';
-import AlbumBigPicture from '../../components/AlbumBigPicure/AlbumBigPicure';
+import AlbumBigPicture from '../../components/Album/AlbumBigPicure/AlbumBigPicure';
 
 class AlbumDetailPage extends Component<Props, State> {
 	state: State = {
