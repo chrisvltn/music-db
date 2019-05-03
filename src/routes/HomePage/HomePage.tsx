@@ -49,7 +49,13 @@ class HomePage extends Component<Props, State> {
 			}
 		})
 
-		const { data } = await axios.get<TrendingRequest>('/trending.php?country=us&type=itunes&format=albums')
+		const { data } = await axios.get<TrendingRequest>('/trending.php', {
+			params: {
+				country: 'us',
+				type: 'itunes',
+				format: 'albums',
+			},
+		})
 
 		this.setState({
 			trendingAlbums: {
@@ -85,7 +91,13 @@ class HomePage extends Component<Props, State> {
 			}
 		})
 
-		const { data } = await axios.get<TrendingRequest>('/trending.php?country=us&type=itunes&format=singles')
+		const { data } = await axios.get<TrendingRequest>('/trending.php', {
+			params: {
+				country: 'us',
+				type: 'itunes',
+				format: 'singles',
+			},
+		})
 
 		this.setState({
 			trendingSingles: {

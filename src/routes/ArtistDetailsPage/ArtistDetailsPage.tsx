@@ -49,7 +49,11 @@ class ArtistDetailsPage extends Component<Props, State> {
 	}
 
 	async getArtistInfo(artistName: string) {
-		const { data } = await axios.get<ArtistRequest>('/search.php?s=' + artistName)
+		const { data } = await axios.get<ArtistRequest>('/search.php', {
+			params: {
+				s: artistName,
+			},
+		})
 
 		if (!data.artists)
 			return this.props.history.push('/404')
@@ -84,7 +88,12 @@ class ArtistDetailsPage extends Component<Props, State> {
 			}
 		})
 
-		const { data } = await axios.get<AlbumRequest>('/searchalbum.php?s=' + artistName)
+		const { data } = await axios.get<AlbumRequest>('/searchalbum.php', {
+			params: {
+				s: artistName,
+			},
+		})
+
 		const albums = (data.album || [])
 			.filter((item, index) => data.album.findIndex(album => album.idAlbum === item.idAlbum) === index)
 			.map(item => ({
@@ -124,7 +133,12 @@ class ArtistDetailsPage extends Component<Props, State> {
 			}
 		})
 
-		const { data } = await axios.get<TracksRequest>('/track-top10.php?s=' + artistName)
+		const { data } = await axios.get<TracksRequest>('/track-top10.php', {
+			params: {
+				s: artistName,
+			},
+		})
+
 		const tracks = (data.track || [])
 			.filter((item, index) => data.track.findIndex(track => track.idTrack === item.idTrack) === index)
 			.map(item => ({
