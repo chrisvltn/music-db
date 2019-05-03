@@ -18,9 +18,9 @@ const ArtistBigPicture: React.FC<Props> = ({
 
 		<div className={classes.overlay}>
 			<Container>
-			<h3 className={classes.name}>{name}</h3>
-			<p className={classes.detail}>{year}</p>
-			<p className={classes.detail}>{style}</p>
+				<h3 className={classes.name}>{name}</h3>
+				<p className={classes.detail}>{year}</p>
+				<p className={classes.detail}>{style}</p>
 			</Container>
 		</div>
 	</div>
@@ -65,6 +65,12 @@ const { classes } = jss.createStyleSheet({
 		height: '100vw',
 		backgroundColor: 'rgba(0, 0, 0, .22)',
 		zIndex: 1,
+		textShadow: {
+			x: 4,
+			y: 4,
+			blur: 10,
+			color: 'rgba(0, 0, 0, 0.6)',
+		},
 		boxShadow: {
 			inset: 'inset',
 			x: 0,
@@ -79,22 +85,18 @@ const { classes } = jss.createStyleSheet({
 	name: {
 		fontSize: 22,
 		color: '#ecf0f1',
-		margin: {
-			top: 0,
-			left: 0,
-			right: 0,
-			bottom: 5,
+		margin: { bottom: 5 },
+		'@media (min-width: 650px)': {
+			fontSize: 34,
+		},
+		'@media (min-width: 980px)': {
+			fontSize: 54,
 		},
 	},
 	detail: {
 		fontSize: 14,
 		color: '#ecf0f1',
-		margin: {
-			top: 0,
-			left: 0,
-			right: 0,
-			bottom: 5,
-		},
+		margin: { bottom: 5 },
 		'&:last-child': {
 			margin: 0,
 		}
