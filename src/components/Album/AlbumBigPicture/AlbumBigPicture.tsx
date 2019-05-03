@@ -33,6 +33,10 @@ const styles = {
 		position: 'relative',
 		textAlign: 'center',
 		padding: [20, 0] as any,
+		'&': `
+			padding-top: calc(env(safe-area-inset-top) + 30px);
+			padding-bottom: 20px;
+		`,
 	},
 	title: {
 		fontSize: 20,

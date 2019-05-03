@@ -131,48 +131,50 @@ class HomePage extends Component<Props, State> {
 
 		return (
 			<Wrapper backgroundImage={thumb}>
-				<Container className={classes.home}>
-					<SearchBar onSubmit={query => this.props.history.push(`/artist/${query}`)} />
+				<Container>
+					<div className={classes.home}>
+						<SearchBar onSubmit={query => this.props.history.push(`/artist/${query}`)} />
 
-					{recentlyViewed.list.length ?
-						<>
-							<SectionTitle>
-								Recently Viewed
-							</SectionTitle>
+						{recentlyViewed.list.length ?
+							<>
+								<SectionTitle>
+									Recently Viewed
+								</SectionTitle>
 
-							<MobileHorizontalScroll>
-								{
-									recentlyViewed.list.map(item =>
-										<ThumbItem
-											key={item.data.id}
-											link={item.type === 'album' ? `/artist/${item.data.artist.name}/album/${item.data.title}` : `/artist/${item.data.name}`}
-											title={item.type === 'album' ? item.data.title : item.data.name}
-											image={item.data.images.thumb}
-										/>
-									)
-								}
-							</MobileHorizontalScroll>
-						</>
-						: null
-					}
+								<MobileHorizontalScroll>
+									{
+										recentlyViewed.list.map(item =>
+											<ThumbItem
+												key={item.data.id}
+												link={item.type === 'album' ? `/artist/${item.data.artist.name}/album/${item.data.title}` : `/artist/${item.data.name}`}
+												title={item.type === 'album' ? item.data.title : item.data.name}
+												image={item.data.images.thumb}
+											/>
+										)
+									}
+								</MobileHorizontalScroll>
+							</>
+							: null
+						}
 
-					<SectionTitle>
-						Trending albums
-					</SectionTitle>
-					<Spinner show={albums.isLoading} />
-					<AlbumList horizontal list={albums.list} />
-					<ErrorMessage show={!!albums.error && !albums.isLoading}>
-						{albums.error}
-					</ErrorMessage>
+						<SectionTitle>
+							Trending albums
+						</SectionTitle>
+						<Spinner show={albums.isLoading} />
+						<AlbumList horizontal list={albums.list} />
+						<ErrorMessage show={!!albums.error && !albums.isLoading}>
+							{albums.error}
+						</ErrorMessage>
 
-					<SectionTitle>
-						Trending singles
-					</SectionTitle>
-					<Spinner show={singles.isLoading} />
-					<AlbumList horizontal list={singles.list} />
-					<ErrorMessage show={!!singles.error && !singles.isLoading}>
-						{singles.error}
-					</ErrorMessage>
+						<SectionTitle>
+							Trending singles
+						</SectionTitle>
+						<Spinner show={singles.isLoading} />
+						<AlbumList horizontal list={singles.list} />
+						<ErrorMessage show={!!singles.error && !singles.isLoading}>
+							{singles.error}
+						</ErrorMessage>
+					</div>
 				</Container>
 			</Wrapper>
 		)
@@ -181,7 +183,10 @@ class HomePage extends Component<Props, State> {
 
 const styles = {
 	home: {
-		padding: { top: 60 },
+		paddingTop: 60,
+		'&': `
+			padding-top: calc(env(safe-area-inset-top) + 60px);
+		`
 	},
 }
 

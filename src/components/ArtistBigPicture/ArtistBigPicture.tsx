@@ -36,7 +36,7 @@ const styles = {
 		height: '100vw',
 		top: 0,
 		left: 0,
-		zIndex: -1,
+		zIndex: 0,
 		backgroundSize: 'cover',
 		'@media (min-width: 650px)': {
 			display: 'none',

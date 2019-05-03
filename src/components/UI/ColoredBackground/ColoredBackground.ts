@@ -7,28 +7,28 @@ const ColoredBackground: React.ComponentType<Props> = styled('div')({
 	left: 0,
 	right: 0,
 	bottom: 0,
-	zIndex: -999,
+	zIndex: -2,
 	'&:before': {
-		content: '""',
-		position: 'absolute',
-		top: 0,
-		left: 0,
-		right: 0,
-		bottom: 0,
-		zIndex: -997,
-		backgroundColor: ({ color }: Props) => color
-	},
-	'&:after': {
 		content: '""',
 		position: 'fixed',
 		top: 0,
 		left: 0,
 		right: 0,
 		bottom: 0,
-		zIndex: -998,
+		zIndex: -1,
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 		backgroundImage: ({ image }: Props) => `url('${image}')`,
+	},
+	'&:after': {
+		content: '""',
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		zIndex: 0,
+		backgroundColor: ({ color }: Props) => color
 	},
 })
 

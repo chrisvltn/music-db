@@ -23,6 +23,9 @@ const styles = {
 		display: 'flex',
 		padding: [5, 15] as any,
 		justifyContent: 'center',
+		'&': `
+			padding-top: calc(env(safe-area-inset-top) + 5px);
+		`
 	},
 	image: {
 		width: 50,
