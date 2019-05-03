@@ -25,6 +25,7 @@ class SearchBar extends Component<Props, State> {
 						<i className={"fa fa-search " + classes.icon} />
 						<input className={classes.input} type="text" placeholder="Search" value={this.state.value} onChange={this.onInputChange.bind(this)} />
 					</label>
+					{/* The "enter" key will be recognized as "submit" if there is a submit button inside the form */}
 					<button hidden type="submit"></button>
 				</form>
 			</div>

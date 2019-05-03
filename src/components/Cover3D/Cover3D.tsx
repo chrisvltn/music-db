@@ -20,9 +20,11 @@ class Cover3D extends Component<Props, State> {
 			back,
 		} = this.props
 
+		/* If there is no image yet, it will only render the wrapper, which has the image width and height */
 		if (!front && !spine && !back)
 			return <div className={classes.wrapper} />
 
+		/* If some of the images is missing, then it should not render a 3D Cover, but just the front cover */
 		const hasAllImages = front && spine && back
 
 		const coverClasses = hasAllImages ? [classes.cover] : []

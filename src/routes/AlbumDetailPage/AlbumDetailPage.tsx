@@ -48,7 +48,7 @@ class AlbumDetailPage extends Component<Props, State> {
 	}
 
 	componentDidMount() {
-		/* These props come from the URL */
+		/* These props come from the URL parameters set in App.ts */
 		const artistName = this.props.match.params.artistName
 		const albumTitle = this.props.match.params.albumTitle
 
