@@ -68,7 +68,7 @@ class AlbumDetailPage extends Component<Props, State> {
 		try {
 			album = await TheAudioDB.getAlbumByArtistNameAndAlbumTitle(artistName, albumTitle)
 		} catch {
-			return this.props.history.push('/505')
+			return this.props.history.push('/500')
 		}
 
 		/* Album is `null` if there is no album found */

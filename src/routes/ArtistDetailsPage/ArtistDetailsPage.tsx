@@ -56,7 +56,7 @@ class ArtistDetailsPage extends Component<Props, State> {
 		try {
 			artist = await TheAudioDB.getArtistByArtistName(artistName)
 		} catch {
-			return this.props.history.push('/505')
+			return this.props.history.push('/500')
 		}
 
 		if (!artist)

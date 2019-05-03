@@ -38,7 +38,7 @@ const App: React.FC = () =>
 			<Route exact path="/artist/:artistName" component={AsyncArtistDetailsPage} />
 			<Route exact path="/dashboard" component={AsyncHomePage} />
 			<Route exact path="/404" component={AsyncNotFoundPage} />
-			<Route exact path="/505" component={AsyncFatalErrorPage} />
+			<Route exact path="/500" component={AsyncFatalErrorPage} />
 			<Redirect from="/" to="/dashboard" exact />
 			<Redirect from="/" to="/404" />
 		</Switch>
