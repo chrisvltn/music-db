@@ -35,10 +35,22 @@ $ npm install
 ### `Step 4` - run application
 
 ```bash
-$ npm run start
+$ npm start
 ```
 
 In browser, open http://localhost:3000
+
+## Testing
+
+```bash
+$ npm run test
+```
+
+## Deployment
+
+```bash
+$ npm run deploy
+```
 
 ## Built with
 
