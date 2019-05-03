@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-/* Libs */
+/* Providers */
+import recentlyViewed from '../../providers/recentlyViewed';
 import TheAudioDB from '../../providers/TheAudioDB';
 
 /* Custom components */
@@ -15,7 +16,6 @@ import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
 import ArtistBigPicture from '../../components/ArtistBigPicture/ArtistBigPicture';
 import TrackList from '../../components/Tracks/TrackList/TrackList';
 import AlbumList from '../../components/Album/AlbumList/AlbumList';
-import recentlyViewed from '../../providers/recentlyViewed';
 
 class ArtistDetailsPage extends Component<Props, State> {
 	state: State = {

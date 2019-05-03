@@ -4,10 +4,10 @@ import { withRouter, RouteComponentProps } from 'react-router';
 
 /* Libs */
 import withStyles from 'react-jss'
-import TheAudioDB from '../../providers/TheAudioDB';
 
 /* Providers */
 import recentlyViewed, { RecentlyViewed } from '../../providers/recentlyViewed';
+import TheAudioDB from '../../providers/TheAudioDB';
 
 /* Custom components */
 import SectionTitle from '../../components/UI/SectionTitle/SectionTitle';

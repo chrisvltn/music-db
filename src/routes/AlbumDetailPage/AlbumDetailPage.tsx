@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-/* Libs */
+/* Providers */
 import TheAudioDB from '../../providers/TheAudioDB';
+import recentlyViewed from '../../providers/recentlyViewed';
 
 /* Custom components */
 import Wrapper from '../../components/UI/Wrapper/Wrapper';
@@ -12,7 +13,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
 import TrackList from '../../components/Tracks/TrackList/TrackList';
 import AlbumBigPicture from '../../components/Album/AlbumBigPicure/AlbumBigPicure';
-import recentlyViewed from '../../providers/recentlyViewed';
 
 class AlbumDetailPage extends Component<Props, State> {
 	state: State = {
