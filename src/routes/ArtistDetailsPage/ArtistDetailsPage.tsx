@@ -105,6 +105,7 @@ class ArtistDetailsPage extends Component<Props, State> {
 					style: item.strStyle,
 				},
 			} as Album))
+			.sort((a, b) => a.year < b.year ? 1 : a.year > b.year ? -1 : 0) // Orders by `year` desc
 
 		this.setState({
 			album: {
@@ -189,34 +190,34 @@ class ArtistDetailsPage extends Component<Props, State> {
 				/>
 
 				<Wrapper>
-				<Container>
-					<SectionTitle>
-						Top tracks
+					<Container>
+						<SectionTitle>
+							Top tracks
 					</SectionTitle>
 
-					<Spinner show={topTracks.isLoading} />
+						<Spinner show={topTracks.isLoading} />
 
-					<TrackList tracks={topTracks.isShowingMore ? topTracks.list : topTracks.list.slice(0, 3)} />
-					<Button
-						show={topTracks.list.length > 3 && !topTracks.isShowingMore}
-						onClick={this.showMoreTracks.bind(this)}
-					>
-						Show more
+						<TrackList tracks={topTracks.isShowingMore ? topTracks.list : topTracks.list.slice(0, 3)} />
+						<Button
+							show={topTracks.list.length > 3 && !topTracks.isShowingMore}
+							onClick={this.showMoreTracks.bind(this)}
+						>
+							Show more
 					</Button>
-					<ErrorMessage show={topTracks.list.length === 0 && !topTracks.isLoading}>
-						There is no top track available
+						<ErrorMessage show={topTracks.list.length === 0 && !topTracks.isLoading}>
+							There is no top track available
 					</ErrorMessage>
 
 
-					<SectionTitle>
-						Albums
+						<SectionTitle>
+							Albums
 					</SectionTitle>
-					<Spinner show={album.isLoading} />
-					<AlbumList list={album.list} />
-					<ErrorMessage show={album.list.length === 0 && !album.isLoading}>
-						There is no album available
+						<Spinner show={album.isLoading} />
+						<AlbumList list={album.list} />
+						<ErrorMessage show={album.list.length === 0 && !album.isLoading}>
+							There is no album available
 					</ErrorMessage>
-				</Container>
+					</Container>
 				</Wrapper>
 			</>
 		)
