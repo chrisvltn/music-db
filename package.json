@@ -42,15 +42,18 @@
     ]
   },
   "devDependencies": {
+    "@types/enzyme": "^3.9.1",
     "@types/jest": "^24.0.11",
     "@types/localforage": "^0.0.34",
     "@types/node": "^11.13.8",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
-    "@types/react-loadable": "^5.5.1",
     "@types/react-jss": "^8.6.3",
+    "@types/react-loadable": "^5.5.1",
     "@types/react-redux": "^7.0.8",
     "@types/react-router-dom": "^4.3.2",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "gh-pages": "^2.0.1",
     "node-sass": "^4.12.0"
   }
