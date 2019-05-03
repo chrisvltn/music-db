@@ -18,6 +18,7 @@ import Container from '../../components/UI/Container/Container';
 import AlbumList from '../../components/Album/AlbumList/AlbumList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ThumbItem from '../../components/ThumbItem/ThumbItem';
+import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
 
 class HomePage extends Component<Props, State> {
 	state: State = {
@@ -28,10 +29,12 @@ class HomePage extends Component<Props, State> {
 		trendingAlbums: {
 			list: [],
 			isLoading: true,
+			error: null,
 		},
 		trendingSingles: {
 			list: [],
 			isLoading: true,
+			error: null,
 		},
 	}
 
@@ -44,15 +47,25 @@ class HomePage extends Component<Props, State> {
 	async getTrendingAlbums() {
 		this.setState({
 			trendingAlbums: {
+				...this.state.trendingAlbums,
 				list: [],
 				isLoading: true,
 			}
 		})
 
-		const trendingAlbums = await TheAudioDB.getTrendingAlbums()
+		let error = null
+		let trendingAlbums: Album[] = []
+
+		try {
+			trendingAlbums = await TheAudioDB.getTrendingAlbums()
+		} catch {
+			error = `Sorry, we couldn't get the trending albums, please try again later.`
+		}
 
 		this.setState({
 			trendingAlbums: {
+				...this.state.trendingAlbums,
+				error,
 				isLoading: false,
 				list: trendingAlbums,
 			}
@@ -62,15 +75,25 @@ class HomePage extends Component<Props, State> {
 	async getTrendingSingles() {
 		this.setState({
 			trendingSingles: {
+				...this.state.trendingSingles,
 				list: [],
 				isLoading: true,
 			}
 		})
 
-		const trendingSingles = await TheAudioDB.getTrendingSingles()
+		let error = null
+		let trendingSingles: Album[] = []
+
+		try {
+			trendingSingles = await TheAudioDB.getTrendingSingles()
+		} catch {
+			error = `Sorry, we couldn't get the trending singles, please try again later.`
+		}
 
 		this.setState({
 			trendingSingles: {
+				...this.state.trendingSingles,
+				error,
 				isLoading: false,
 				list: trendingSingles,
 			}
@@ -134,12 +157,18 @@ class HomePage extends Component<Props, State> {
 					</SectionTitle>
 					<Spinner show={albums.isLoading} />
 					<AlbumList horizontal list={albums.list} />
+					<ErrorMessage show={!!albums.error && !albums.isLoading}>
+						{albums.error}
+					</ErrorMessage>
 
 					<SectionTitle>
 						Trending singles
 					</SectionTitle>
 					<Spinner show={singles.isLoading} />
 					<AlbumList horizontal list={singles.list} />
+					<ErrorMessage show={!!singles.error && !singles.isLoading}>
+						{singles.error}
+					</ErrorMessage>
 				</Container>
 			</Wrapper>
 		)
@@ -162,10 +191,12 @@ type State = {
 	trendingAlbums: {
 		list: Album[]
 		isLoading: boolean
+		error: string | null
 	}
 	trendingSingles: {
 		list: Album[]
 		isLoading: boolean
+		error: string | null
 	}
 }
 

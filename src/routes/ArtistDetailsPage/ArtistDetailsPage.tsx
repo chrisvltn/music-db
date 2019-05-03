@@ -33,10 +33,12 @@ class ArtistDetailsPage extends Component<Props, State> {
 		topTracks: {
 			isShowingMore: false,
 			isLoading: true,
+			error: null,
 			list: [],
 		},
 		album: {
 			isLoading: true,
+			error: null,
 			list: [],
 		}
 	}
@@ -49,7 +51,13 @@ class ArtistDetailsPage extends Component<Props, State> {
 	}
 
 	async getArtistInfo(artistName: string) {
-		const artist = await TheAudioDB.getArtistByArtistName(artistName)
+		let artist: Artist | null = null
+
+		try {
+			artist = await TheAudioDB.getArtistByArtistName(artistName)
+		} catch {
+			return this.props.history.push('/505')
+		}
 
 		if (!artist)
 			return this.props.history.push('/404')
@@ -68,15 +76,24 @@ class ArtistDetailsPage extends Component<Props, State> {
 	async getArtistAlbums(artistName: string) {
 		this.setState({
 			album: {
+				...this.state.album,
 				list: [],
 				isLoading: true,
 			}
 		})
 
-		const albums = await TheAudioDB.getArtistAlbumsByArtistName(artistName)
+		let albums: Album[] = []
+		let error = null
+
+		try {
+			albums = await TheAudioDB.getArtistAlbumsByArtistName(artistName)
+		} catch {
+			error = `Sorry, we couldn't get the albums, please try again later.`
+		}
 
 		this.setState({
 			album: {
+				error,
 				isLoading: false,
 				list: albums,
 			}
@@ -92,11 +109,19 @@ class ArtistDetailsPage extends Component<Props, State> {
 			}
 		})
 
-		const tracks = await TheAudioDB.getArtistTopTracksByArtistName(artistName)
+		let tracks: Track[] = []
+		let error = null
+
+		try {
+			tracks = await TheAudioDB.getArtistTopTracksByArtistName(artistName)
+		} catch {
+			error = `Sorry, we couldn't get the tracks, please try again later.`
+		}
 
 		this.setState({
 			topTracks: {
 				...this.state.topTracks,
+				error,
 				isLoading: false,
 				list: tracks,
 			}
@@ -137,7 +162,7 @@ class ArtistDetailsPage extends Component<Props, State> {
 					<Container>
 						<SectionTitle>
 							Top tracks
-					</SectionTitle>
+						</SectionTitle>
 
 						<Spinner show={topTracks.isLoading} />
 
@@ -147,20 +172,26 @@ class ArtistDetailsPage extends Component<Props, State> {
 							onClick={this.showMoreTracks.bind(this)}
 						>
 							Show more
-					</Button>
-						<ErrorMessage show={topTracks.list.length === 0 && !topTracks.isLoading}>
+						</Button>
+						<ErrorMessage show={topTracks.list.length === 0 && !topTracks.isLoading && !topTracks.error}>
 							There is no top track available
-					</ErrorMessage>
+						</ErrorMessage>
+						<ErrorMessage show={!!topTracks.error && !topTracks.isLoading}>
+							{topTracks.error}
+						</ErrorMessage>
 
 
 						<SectionTitle>
 							Albums
-					</SectionTitle>
+						</SectionTitle>
 						<Spinner show={album.isLoading} />
 						<AlbumList list={album.list} />
-						<ErrorMessage show={album.list.length === 0 && !album.isLoading}>
+						<ErrorMessage show={album.list.length === 0 && !album.isLoading && !album.error}>
 							There is no album available
-					</ErrorMessage>
+						</ErrorMessage>
+						<ErrorMessage show={!!album.error && !album.isLoading}>
+							{album.error}
+						</ErrorMessage>
 					</Container>
 				</Wrapper>
 			</>
@@ -175,10 +206,12 @@ type State = {
 		list: Track[]
 		isLoading: boolean
 		isShowingMore: boolean
+		error: string | null
 	}
 	album: {
 		list: Album[]
 		isLoading: boolean
+		error: string | null
 	}
 }
 

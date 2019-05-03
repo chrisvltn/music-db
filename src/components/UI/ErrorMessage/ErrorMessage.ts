@@ -8,6 +8,7 @@ const ErrorMessage: React.ComponentType<HTMLProps<HTMLParagraphElement>> = style
 	fontSize: 14,
 	color: '#BDBDBD',
 	lineHeight: 1,
+	margin: { top: 10 },
 })
 
 export default withShow(ErrorMessage)

@@ -42,6 +42,7 @@ class AlbumDetailPage extends Component<Props, State> {
 		},
 		tracks: {
 			isLoading: true,
+			error: null,
 			list: [],
 		},
 	}
@@ -62,7 +63,13 @@ class AlbumDetailPage extends Component<Props, State> {
 			},
 		})
 
-		const album = await TheAudioDB.getAlbumByArtistNameAndAlbumTitle(artistName, albumTitle)
+		let album: Album | null = null
+
+		try {
+			album = await TheAudioDB.getAlbumByArtistNameAndAlbumTitle(artistName, albumTitle)
+		} catch {
+			return this.props.history.push('/505')
+		}
 
 		/* Album is `null` if there is no album found */
 		if (!album)
@@ -89,11 +96,19 @@ class AlbumDetailPage extends Component<Props, State> {
 			}
 		})
 
-		const tracks = await TheAudioDB.getAlbumTracksByAlbumId(albumId)
+		let tracks: Track[] = []
+		let error = null
+
+		try {
+			tracks = await TheAudioDB.getAlbumTracksByAlbumId(albumId)
+		} catch {
+			error = `We couldn't get the tracks, please try again in a few seconds`
+		}
 
 		this.setState({
 			tracks: {
 				...this.state.tracks,
+				error,
 				isLoading: false,
 				list: tracks,
 			}
@@ -130,8 +145,11 @@ class AlbumDetailPage extends Component<Props, State> {
 					<Container>
 						<TrackList tracks={tracks.list} />
 						<Spinner show={tracks.isLoading} />
-						<ErrorMessage show={tracks.list.length === 0 && !tracks.isLoading}>
+						<ErrorMessage show={tracks.list.length === 0 && !tracks.isLoading && !tracks.error}>
 							There is no track available
+						</ErrorMessage>
+						<ErrorMessage show={!!tracks.error && !tracks.isLoading}>
+							{tracks.error}
 						</ErrorMessage>
 					</Container>
 				</Wrapper>
@@ -149,6 +167,7 @@ type State = {
 	album: { isLoading: boolean } & Album
 	tracks: {
 		isLoading: boolean
+		error: string | null
 		list: Track[]
 	}
 }

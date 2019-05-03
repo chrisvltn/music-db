@@ -24,6 +24,10 @@ const AsyncNotFoundPage = Loadable({
 	loader: () => import('./routes/NotFoundPage/NotFoundPage'),
 	loading: PageLoading,
 })
+const AsyncFatalErrorPage = Loadable({
+	loader: () => import('./routes/FatalErrorPage/FatalErrorPage'),
+	loading: PageLoading,
+})
 
 const App: React.FC = () =>
 	<>
@@ -34,6 +38,7 @@ const App: React.FC = () =>
 			<Route exact path="/artist/:artistName" component={AsyncArtistDetailsPage} />
 			<Route exact path="/dashboard" component={AsyncHomePage} />
 			<Route exact path="/404" component={AsyncNotFoundPage} />
+			<Route exact path="/505" component={AsyncFatalErrorPage} />
 			<Redirect from="/" to="/dashboard" exact />
 			<Redirect from="/" to="/404" />
 		</Switch>
