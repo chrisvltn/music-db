@@ -1,44 +1,76 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+	<a href="https://chrisvltn.github.io/music-db">
+		<img width="150" height="150" src="readme/logo-240.png" />
+	</a>
+</div>
 
-## Available Scripts
+# [Music DB]
 
-In the project directory, you can run:
+*A music library interface using React in front-end and [The Audio DB's API] as back-end*
 
-### `npm start`
+## [Live]
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![Live](readme/demo.png)](https://chrisvltn.github.io/music-db)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+### `Step 1` - clone the repo
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+$ git clone https://github.com/chrisvltn/music-db.git
+```
 
-### `npm run build`
+### `Step 2` - cd in the repo
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+$ cd music-db
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### `Step 3` - install dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+$ npm install
+```
 
-### `npm run eject`
+### `Step 4` - run application
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+$ npm run start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In browser, open http://localhost:3000
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Built with
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [x] - [React]
+- [x] - [Typescript]
+- [x] - [CSS in JS]
+- [x] - [LocalForage]
 
-## Learn More
+## Main Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [x] - Search artist
+- [x] - Albums list
+- [x] - Recently viewed artists and albums
+- [x] - Trending albums and singles
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+----------------------------------------------
+
+- [x] - Service Worker
+- [x] - Browser database
+- [x] - Add to Home Screen, Splash Screen, Standalone Mode
+- [x] - Offline Cache Support
+- [x] - Background Sync
+
+#### License
+
+MIT © [chrisvltn]
+
+[Music DB]: https://chrisvltn.github.io/music-db
+[Live]: https://chrisvltn.github.io/music-db
+[The Audio DB's API]: https://chrisvltn.github.io/music-db
+[React]: https://reactjs.org/
+[Typescript]: https://www.typescriptlang.org/
+[CSS in JS]: https://cssinjs.org/
+[LocalForage]: https://localforage.github.io/localForage/
+[chrisvltn]: https://github.com/chrisvltn
