@@ -125,11 +125,6 @@ class AlbumDetailPage extends Component<Props, State> {
 			tracks,
 		} = this.state
 
-		if (!album.isLoading && !album.id) {
-			this.props.history.push('/404')
-			return null
-		}
-
 		return (
 			<>
 				<AlbumBigPicture
