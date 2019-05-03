@@ -19,6 +19,7 @@ import AlbumList from '../../components/Album/AlbumList/AlbumList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ThumbItem from '../../components/ThumbItem/ThumbItem';
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
+import withRandomArtistThumbnail, { WithRandomArtistThumbnail } from '../../hoc/withRandomArtistThumbnail/withRandomArtistThumbnail';
 
 class HomePage extends Component<Props, State> {
 	state: State = {
@@ -123,10 +124,13 @@ class HomePage extends Component<Props, State> {
 		const albums = this.state.trendingAlbums
 		const singles = this.state.trendingSingles
 
-		const { classes } = this.props
+		const {
+			thumb,
+			classes,
+		} = this.props
 
 		return (
-			<Wrapper>
+			<Wrapper backgroundImage={thumb}>
 				<Container className={classes.home}>
 					<SearchBar onSubmit={query => this.props.history.push(`/artist/${query}`)} />
 
@@ -181,7 +185,7 @@ const styles = {
 	},
 }
 
-type Props = StyledComponentProps<typeof styles> & RouteComponentProps
+type Props = StyledComponentProps<typeof styles> & RouteComponentProps & WithRandomArtistThumbnail
 
 type State = {
 	recentlyViewed: {
@@ -200,4 +204,4 @@ type State = {
 	}
 }
 
-export default withStyles(styles)(withRouter(HomePage))
+export default withStyles(styles)(withRouter(withRandomArtistThumbnail(HomePage)))
