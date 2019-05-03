@@ -3,14 +3,15 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 /* Libs */
-import jss from '../../lib/jss';
+import withStyles from 'react-jss'
 
 /* Custom components */
 import Wrapper from '../../components/UI/Wrapper/Wrapper';
 import withRandomArtistThumbnail, { WithRandomArtistThumbnail } from '../../hoc/withRandomArtistThumbnail/withRandomArtistThumbnail';
 import Container from '../../components/UI/Container/Container';
 
-const NotFoundPage: React.FC<WithRandomArtistThumbnail> = ({
+const NotFoundPage: React.FC<Props> = ({
+	classes,
 	thumb: background,
 }) =>
 	<Wrapper backgroundImage={background}>
@@ -21,7 +22,7 @@ const NotFoundPage: React.FC<WithRandomArtistThumbnail> = ({
 		</Container>
 	</Wrapper>
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	wrapper: {
 		display: 'flex',
 		justifyContent: 'center',
@@ -45,6 +46,8 @@ const { classes } = jss.createStyleSheet({
 		lineHeight: 1,
 		color: '#ecf0f1',
 	},
-}).attach()
+}
 
-export default withRandomArtistThumbnail(NotFoundPage)
+type Props = StyledComponentProps<typeof styles> & WithRandomArtistThumbnail
+
+export default withStyles(styles)(withRandomArtistThumbnail(NotFoundPage))

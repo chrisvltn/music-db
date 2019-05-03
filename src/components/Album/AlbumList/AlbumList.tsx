@@ -1,10 +1,11 @@
 import React from 'react'
-import jss from '../../../lib/jss';
+import withStyles from 'react-jss'
 
 import MobileHorizontalScroll from '../../UI/MobileHorizontalScroll/MobileHorizontalScroll';
 import ThumbItem from '../../ThumbItem/ThumbItem';
 
 const AlbumList: React.FC<Props> = ({
+	classes,
 	list,
 	horizontal,
 }) => {
@@ -26,15 +27,15 @@ const AlbumList: React.FC<Props> = ({
 		</div>
 }
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	wrapper: {
 		textAlign: 'center',
 	},
-}).attach()
+}
 
-type Props = {
+type Props = StyledComponentProps<typeof styles> & {
 	list: Album[]
 	horizontal?: boolean
 }
 
-export default AlbumList
+export default withStyles(styles)(AlbumList)

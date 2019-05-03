@@ -4,7 +4,7 @@ import { LoadingComponentProps } from 'react-loadable';
 import { Link } from 'react-router-dom';
 
 /* Libs */
-import jss from '../../lib/jss';
+import withStyles from 'react-jss'
 
 /* Custom components */
 import Wrapper from '../UI/Wrapper/Wrapper';
@@ -13,6 +13,7 @@ import Spinner from '../UI/Spinner/Spinner';
 import withRandomArtistThumbnail, { WithRandomArtistThumbnail } from '../../hoc/withRandomArtistThumbnail/withRandomArtistThumbnail';
 
 const PageLoading: React.FC<Props> = ({
+	classes,
 	thumb,
 	isLoading,
 	error,
@@ -38,7 +39,7 @@ const PageLoading: React.FC<Props> = ({
 	)
 }
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	wrapper: {
 		display: 'flex',
 		justifyContent: 'center',
@@ -65,8 +66,8 @@ const { classes } = jss.createStyleSheet({
 	spinner: {
 		fontSize: 27,
 	}
-}).attach()
+}
 
-type Props = LoadingComponentProps & WithRandomArtistThumbnail
+type Props = StyledComponentProps<typeof styles> & LoadingComponentProps & WithRandomArtistThumbnail
 
-export default withRandomArtistThumbnail(PageLoading)
+export default withStyles(styles)(withRandomArtistThumbnail(PageLoading))

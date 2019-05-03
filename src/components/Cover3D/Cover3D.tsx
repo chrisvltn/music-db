@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import jss from '../../lib/jss';
+import withStyles from 'react-jss'
 
 class Cover3D extends Component<Props, State> {
 	state = {
@@ -14,6 +14,7 @@ class Cover3D extends Component<Props, State> {
 
 	render() {
 		const {
+			classes,
 			front,
 			spine,
 			back,
@@ -77,7 +78,7 @@ const imagesStyle = {
 	},
 }
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	wrapper: {
 		textAlign: 'center',
 		perspective: 550,
@@ -95,7 +96,7 @@ const { classes } = jss.createStyleSheet({
 				duration: '.3s',
 				timingFunction: 'ease',
 			},
-		],
+		] as any,
 	},
 	coverFrontHighlight: {
 		transform: 'rotateY(135deg) translateZ(0) translateX(-80px)',
@@ -104,7 +105,7 @@ const { classes } = jss.createStyleSheet({
 		transform: 'rotateY(45deg) translateZ(0) translateX(-80px)',
 	},
 	front: {
-		extend: [imagesStyle.image, imagesStyle.cover],
+		extend: [imagesStyle.image, imagesStyle.cover] as any,
 		transform: 'rotateY(225deg) translateZ(115px)',
 	},
 	frontOnly: {
@@ -125,12 +126,12 @@ const { classes } = jss.createStyleSheet({
 		transform: 'rotateY(-90deg) translateZ(60px)',
 	},
 	back: {
-		extend: [imagesStyle.image, imagesStyle.cover],
+		extend: [imagesStyle.image, imagesStyle.cover] as any,
 		transform: 'rotateY(-45deg) translateZ(115px)',
 	},
-}).attach()
+}
 
-type Props = {
+type Props = StyledComponentProps<typeof styles> & {
 	front: string
 	spine: string
 	back: string
@@ -140,4 +141,4 @@ type State = {
 	highlightedSide: string
 }
 
-export default Cover3D
+export default withStyles(styles)(Cover3D)

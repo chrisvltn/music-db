@@ -1,5 +1,5 @@
 import React, { Component, ChangeEvent, FormEvent } from 'react'
-import jss from '../../lib/jss';
+import withStyles from 'react-jss'
 
 class SearchBar extends Component<Props, State> {
 	state = {
@@ -16,6 +16,8 @@ class SearchBar extends Component<Props, State> {
 	}
 
 	render() {
+		const { classes } = this.props
+
 		return (
 			<div>
 				<form onSubmit={this.onFormSubmit.bind(this)} className={classes.form}>
@@ -30,7 +32,7 @@ class SearchBar extends Component<Props, State> {
 	}
 }
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	form: {
 		display: 'block',
 	},
@@ -67,9 +69,9 @@ const { classes } = jss.createStyleSheet({
 		left: 10,
 		color: '#ecf0f1',
 	},
-}).attach()
+}
 
-type Props = {
+type Props = StyledComponentProps<typeof styles> & {
 	onSubmit: (value: string) => void
 }
 
@@ -77,4 +79,4 @@ type State = {
 	value: string
 }
 
-export default SearchBar
+export default withStyles(styles)(SearchBar)

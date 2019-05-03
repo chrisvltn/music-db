@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import jss from '../../../lib/jss';
+import withStyles from 'react-jss'
 
 import Cover3D from '../../Cover3D/Cover3D';
 import ColoredBackground from '../../UI/ColoredBackground/ColoredBackground';
 
 const AlbumBigPicture: React.FC<Props> = ({
+	classes,
 	title,
 	year,
 	frontCover,
@@ -27,11 +28,11 @@ const AlbumBigPicture: React.FC<Props> = ({
 		</p>
 	</div>
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	album: {
 		position: 'relative',
 		textAlign: 'center',
-		padding: [20, 0]
+		padding: [20, 0] as any,
 	},
 	title: {
 		fontSize: 20,
@@ -59,9 +60,9 @@ const { classes } = jss.createStyleSheet({
 			color: '#ecf0f1',
 		}
 	},
-}).attach()
+}
 
-type Props = {
+type Props = StyledComponentProps<typeof styles> & {
 	title: string
 	year: string
 	frontCover: string
@@ -70,4 +71,4 @@ type Props = {
 	artistName: string
 }
 
-export default AlbumBigPicture
+export default withStyles(styles)(AlbumBigPicture)

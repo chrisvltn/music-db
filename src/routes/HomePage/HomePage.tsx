@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 /* Libs */
-import jss from '../../lib/jss';
+import withStyles from 'react-jss'
 import axios from '../../lib/axios';
 
 /* Providers */
@@ -136,6 +136,8 @@ class HomePage extends Component<Props, State> {
 		const albums = this.state.trendingAlbums
 		const singles = this.state.trendingSingles
 
+		const { classes } = this.props
+
 		return (
 			<Wrapper>
 				<Container className={classes.home}>
@@ -180,13 +182,13 @@ class HomePage extends Component<Props, State> {
 	}
 }
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	home: {
 		padding: { top: 60 },
 	},
-}).attach()
+}
 
-type Props = RouteComponentProps
+type Props = StyledComponentProps<typeof styles> & RouteComponentProps
 
 type State = {
 	recentlyViewed: {
@@ -203,4 +205,4 @@ type State = {
 	}
 }
 
-export default withRouter(HomePage)
+export default withStyles(styles)(withRouter(HomePage))

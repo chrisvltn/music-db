@@ -1,10 +1,11 @@
 import React from 'react'
-import jss from '../../lib/jss';
+import withStyles from 'react-jss'
 
 import ColoredBackground from '../UI/ColoredBackground/ColoredBackground';
 import Container from '../UI/Container/Container';
 
 const ArtistBigPicture: React.FC<Props> = ({
+	classes,
 	name,
 	imageThumb,
 	imageWide,
@@ -25,7 +26,7 @@ const ArtistBigPicture: React.FC<Props> = ({
 		</div>
 	</div>
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	artist: {
 		position: 'relative',
 	},
@@ -101,9 +102,9 @@ const { classes } = jss.createStyleSheet({
 			margin: 0,
 		}
 	},
-}).attach()
+}
 
-type Props = {
+type Props = StyledComponentProps<typeof styles> & {
 	name: string
 	imageThumb: string
 	imageWide: string
@@ -111,4 +112,4 @@ type Props = {
 	style: string
 }
 
-export default ArtistBigPicture
+export default withStyles(styles)(ArtistBigPicture)

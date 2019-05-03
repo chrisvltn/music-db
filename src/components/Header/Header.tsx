@@ -1,18 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'react-router';
-import jss from '../../lib/jss';
+import withStyles from 'react-jss'
 
 import logo from '../../assets/images/logo.png'
 
-const Header: React.FC<RouteComponentProps> = () =>
+const Header: React.FC<Props> = ({
+	classes,
+}) =>
 	<div className={classes.header}>
 		<Link to="/">
 			<img className={classes.image} src={logo} alt="Music DB Logo" />
 		</Link>
 	</div>
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	header: {
 		position: 'absolute',
 		top: 0,
@@ -20,13 +21,15 @@ const { classes } = jss.createStyleSheet({
 		right: 0,
 		zIndex: 99,
 		display: 'flex',
-		padding: [5, 15],
+		padding: [5, 15] as any,
 		justifyContent: 'center',
 	},
 	image: {
 		width: 50,
 		height: 50,
 	},
-}).attach()
+}
 
-export default withRouter(Header)
+type Props = StyledComponentProps<typeof styles>
+
+export default withStyles(styles)(Header)

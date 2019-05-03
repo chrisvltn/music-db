@@ -1,7 +1,8 @@
 import React from 'react'
-import jss from '../../../lib/jss';
+import withStyles from 'react-jss'
 
 const TrackItem: React.FC<Props> = ({
+	classes,
 	number,
 	title: name,
 	duration,
@@ -24,7 +25,7 @@ const TrackItem: React.FC<Props> = ({
 	)
 }
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	item: {
 		position: 'relative',
 		display: 'flex',
@@ -49,7 +50,7 @@ const { classes } = jss.createStyleSheet({
 		},
 	},
 	text: {
-		padding: [10, 0],
+		padding: [10, 0] as any,
 		verticalAlign: 'middle',
 	},
 	smallText: {
@@ -65,12 +66,12 @@ const { classes } = jss.createStyleSheet({
 		textAlign: 'left',
 		fontSize: 16,
 	},
-}).attach()
+}
 
-type Props = {
+type Props = StyledComponentProps<typeof styles> & {
 	number: number
 	title: string
 	duration: number
 }
 
-export default TrackItem
+export default withStyles(styles)(TrackItem)

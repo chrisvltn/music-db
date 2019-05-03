@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import jss from '../../lib/jss';
+import withStyles from 'react-jss'
 
 import placeholder from '../../assets/images/thumb-placeholder.png'
 
 const ThumbItem: React.FC<Props> = ({
+	classes,
 	title,
 	image,
 	link,
@@ -19,10 +20,10 @@ const ThumbItem: React.FC<Props> = ({
 	)
 }
 
-const { classes } = jss.createStyleSheet({
+const styles = {
 	card: {
 		display: 'inline-block',
-		padding: [0, 5],
+		padding: [0, 5] as any,
 		minWidth: 150,
 		width: 150,
 		verticalAlign: 'top',
@@ -43,12 +44,12 @@ const { classes } = jss.createStyleSheet({
 		color: '#ecf0f1',
 		whiteSpace: 'normal',
 	},
-}).attach()
+}
 
-type Props = {
+type Props = StyledComponentProps<typeof styles> & {
 	title: string
 	image: string
 	link: string
 }
 
-export default ThumbItem
+export default withStyles(styles)(ThumbItem)

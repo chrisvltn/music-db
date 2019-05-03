@@ -6,11 +6,15 @@ import * as serviceWorker from './serviceWorker'
 
 // Libs
 import { HashRouter } from 'react-router-dom'
+import { JssProvider } from 'react-jss'
+import jss from './lib/jss';
 
 const app =
-	<HashRouter>
-		<App />
-	</HashRouter>
+	<JssProvider jss={jss}>
+		<HashRouter>
+			<App />
+		</HashRouter>
+	</JssProvider>
 
 ReactDOM.render(app, document.getElementById('root'))
 
