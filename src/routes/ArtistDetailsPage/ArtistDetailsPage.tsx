@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 /* Libs */
-import axios from '../../lib/axios';
+import TheAudioDB from '../../providers/TheAudioDB';
 
 /* Custom components */
 import Button from '../../components/UI/Button/Button';
@@ -49,25 +49,10 @@ class ArtistDetailsPage extends Component<Props, State> {
 	}
 
 	async getArtistInfo(artistName: string) {
-		const { data } = await axios.get<ArtistRequest>('/search.php', {
-			params: {
-				s: artistName,
-			},
-		})
+		const artist = await TheAudioDB.getArtistByArtistName(artistName)
 
-		if (!data.artists)
+		if (!artist)
 			return this.props.history.push('/404')
-
-		const artist = {
-			name: data.artists[0].strArtist,
-			id: data.artists[0].idArtist,
-			formedYear: data.artists[0].intFormedYear || data.artists[0].intBornYear,
-			style: data.artists[0].strStyle || data.artists[0].strGenre,
-			images: {
-				thumb: data.artists[0].strArtistThumb,
-				wide: data.artists[0].strArtistWideThumb || data.artists[0].strArtistBanner || data.artists[0].strArtistClearart || data.artists[0].strArtistFanart || data.artists[0].strArtistFanart2 || data.artists[0].strArtistFanart3,
-			},
-		}
 
 		this.saveRecentlyViewed(artist)
 
@@ -88,33 +73,7 @@ class ArtistDetailsPage extends Component<Props, State> {
 			}
 		})
 
-		const { data } = await axios.get<AlbumRequest>('/searchalbum.php', {
-			params: {
-				s: artistName,
-			},
-		})
-
-		const albums = (data.album || [])
-			.filter((item, index) => data.album.findIndex(album => album.idAlbum === item.idAlbum) === index)
-			.map(item => ({
-				id: item.idAlbum,
-				title: item.strAlbum,
-				year: item.intYearReleased,
-				images: {
-					thumb: item.strAlbumThumb,
-					cover: {
-						front: item.strAlbumThumbHQ || item.strAlbumThumb,
-						back: item.strAlbumThumbBack,
-						spine: item.strAlbumSpine,
-					},
-				},
-				artist: {
-					id: item.idArtist,
-					name: item.strArtist,
-					style: item.strStyle,
-				},
-			} as Album))
-			.sort((a, b) => a.year < b.year ? 1 : a.year > b.year ? -1 : 0) // Orders by `year` desc
+		const albums = await TheAudioDB.getArtistAlbumsByArtistName(artistName)
 
 		this.setState({
 			album: {
@@ -133,36 +92,7 @@ class ArtistDetailsPage extends Component<Props, State> {
 			}
 		})
 
-		const { data } = await axios.get<TracksRequest>('/track-top10.php', {
-			params: {
-				s: artistName,
-			},
-		})
-
-		const tracks = (data.track || [])
-			.filter((item, index) => data.track.findIndex(track => track.idTrack === item.idTrack) === index)
-			.map(item => ({
-				id: item.idTrack,
-				title: item.strTrack,
-				duration: parseInt(item.intDuration),
-				number: parseInt(item.intTrackNumber),
-				youtubeLink: item.strMusicVid,
-				album: {
-					id: item.idAlbum,
-					title: item.strAlbum,
-					images: {
-						thumb: item.strTrackThumb,
-						cover: {
-							front: item.strTrackThumb,
-						},
-					},
-					artist: {
-						id: item.idArtist,
-						name: item.strArtist,
-						style: item.strStyle,
-					},
-				},
-			} as Track))
+		const tracks = await TheAudioDB.getArtistTopTracksByArtistName(artistName)
 
 		this.setState({
 			topTracks: {

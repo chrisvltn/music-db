@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 /* Libs */
-import axios from '../../lib/axios';
+import TheAudioDB from '../../providers/TheAudioDB';
 
 /* Custom components */
 import Wrapper from '../../components/UI/Wrapper/Wrapper';
@@ -62,36 +62,11 @@ class AlbumDetailPage extends Component<Props, State> {
 			},
 		})
 
-		const { data } = await axios.get<AlbumRequest>(`/searchalbum.php`, {
-			params: {
-				s: artistName,
-				a: albumTitle,
-			}
-		})
+		const album = await TheAudioDB.getAlbumByArtistNameAndAlbumTitle(artistName, albumTitle)
 
 		/* Album is `null` if there is no album found */
-		if (!data.album)
+		if (!album)
 			return this.props.history.push('/404')
-
-		const album: Album = {
-			id: data.album[0].idAlbum,
-			title: data.album[0].strAlbum,
-			year: data.album[0].intYearReleased,
-			images: {
-				thumb: data.album[0].strAlbumThumb,
-				cover: {
-					front: data.album[0].strAlbumThumbHQ || data.album[0].strAlbumThumb,
-					back: data.album[0].strAlbumThumbBack,
-					spine: data.album[0].strAlbumSpine,
-				},
-			},
-			artist: {
-				...this.state.album.artist,
-				id: data.album[0].idArtist,
-				name: data.album[0].strArtist,
-				style: data.album[0].strStyle,
-			},
-		}
 
 		this.getTrackList(album.id)
 		this.saveRecentlyViewed(album)
@@ -114,36 +89,7 @@ class AlbumDetailPage extends Component<Props, State> {
 			}
 		})
 
-		const { data } = await axios.get<TracksRequest>('/track.php', {
-			params: {
-				m: albumId,
-			},
-		})
-
-		const tracks = (data.track || [])
-			.filter((item, index) => data.track.findIndex(track => track.idTrack === item.idTrack) === index)
-			.map(item => ({
-				id: item.idTrack,
-				title: item.strTrack,
-				duration: parseInt(item.intDuration),
-				number: parseInt(item.intTrackNumber),
-				youtubeLink: item.strMusicVid,
-				album: {
-					id: item.idAlbum,
-					title: item.strAlbum,
-					images: {
-						thumb: item.strTrackThumb,
-						cover: {
-							front: item.strTrackThumb,
-						},
-					},
-					artist: {
-						id: item.idArtist,
-						name: item.strArtist,
-						style: item.strStyle,
-					},
-				},
-			} as Track))
+		const tracks = await TheAudioDB.getAlbumTracksByAlbumId(albumId)
 
 		this.setState({
 			tracks: {

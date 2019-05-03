@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 
 /* Libs */
 import withStyles from 'react-jss'
-import axios from '../../lib/axios';
+import TheAudioDB from '../../providers/TheAudioDB';
 
 /* Providers */
 import recentlyViewed, { RecentlyViewed } from '../../providers/recentlyViewed';
@@ -49,36 +49,12 @@ class HomePage extends Component<Props, State> {
 			}
 		})
 
-		const { data } = await axios.get<TrendingRequest>('/trending.php', {
-			params: {
-				country: 'us',
-				type: 'itunes',
-				format: 'albums',
-			},
-		})
+		const trendingAlbums = await TheAudioDB.getTrendingAlbums()
 
 		this.setState({
 			trendingAlbums: {
 				isLoading: false,
-				list: data.trending
-					.filter((item, index) => data.trending.findIndex(trending => trending.idAlbum === item.idAlbum) === index)
-					.map(item => ({
-						id: item.idAlbum,
-						title: item.strAlbum,
-						images: {
-							thumb: item.strAlbumThumb,
-							cover: {
-								front: item.strAlbumThumb,
-							},
-						},
-						artist: {
-							id: item.idArtist,
-							name: item.strArtist,
-							images: {
-								thumb: item.strArtistThumb,
-							},
-						},
-					} as Album)),
+				list: trendingAlbums,
 			}
 		})
 	}
@@ -91,36 +67,12 @@ class HomePage extends Component<Props, State> {
 			}
 		})
 
-		const { data } = await axios.get<TrendingRequest>('/trending.php', {
-			params: {
-				country: 'us',
-				type: 'itunes',
-				format: 'singles',
-			},
-		})
+		const trendingSingles = await TheAudioDB.getTrendingSingles()
 
 		this.setState({
 			trendingSingles: {
 				isLoading: false,
-				list: data.trending
-					.filter((item, index) => data.trending.findIndex(trending => trending.idTrack === item.idTrack) === index)
-					.map(item => ({
-						id: item.idTrack,
-						title: item.strTrack,
-						images: {
-							thumb: item.strTrackThumb || item.strAlbumThumb,
-							cover: {
-								front: item.strTrackThumb || item.strAlbumThumb,
-							},
-						},
-						artist: {
-							id: item.idArtist,
-							name: item.strArtist,
-							images: {
-								thumb: item.strArtistThumb,
-							},
-						},
-					} as Album)),
+				list: trendingSingles,
 			}
 		})
 	}
