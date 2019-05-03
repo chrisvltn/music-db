@@ -56,8 +56,8 @@ $ npm run deploy
 
 - [x] - [React]
 - [x] - [Typescript]
-- [x] - [CSS in JS]
-- [x] - [LocalForage]
+- [x] - [JSS] - CSS in JS
+- [x] - [LocalForage] - Web data store manager library developed by Mozilla
 
 ## Main Features
 
@@ -74,7 +74,7 @@ $ npm run deploy
 - [x] - Offline Cache Support
 - [x] - Background Sync
 
-#### License
+## License
 
 MIT © [chrisvltn]
 
@@ -83,6 +83,6 @@ MIT © [chrisvltn]
 [The Audio DB's API]: https://chrisvltn.github.io/music-db
 [React]: https://reactjs.org/
 [Typescript]: https://www.typescriptlang.org/
-[CSS in JS]: https://cssinjs.org/
+[JSS]: https://cssinjs.org/
 [LocalForage]: https://localforage.github.io/localForage/
 [chrisvltn]: https://github.com/chrisvltn
